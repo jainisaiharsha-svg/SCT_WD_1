@@ -1,0 +1,157 @@
+/* --- Keyframes for Animations --- */
+@keyframes background-pan {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* --- Basic Setup --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #111827; /* Dark background */
+    color: #e5e7eb; /* Light text */
+}
+
+/* --- Navigation Bar --- */
+#main-nav {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    z-index: 1000;
+    padding: 25px 0;
+    transition: all 0.4s ease-in-out;
+}
+
+/* TASK: Scrolled state with a "glass" effect */
+#main-nav.scrolled {
+    background-color: rgba(23, 30, 46, 0.8); /* Semi-transparent background */
+    -webkit-backdrop-filter: blur(10px); /* The blur effect */
+    backdrop-filter: blur(10px); /* For Safari */
+    padding: 15px 0;
+    border-block-end: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-content {
+    max-inline-size: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 40px;
+}
+
+#main-nav ul li a {
+    text-decoration: none;
+    color: #d1d5db;
+    font-weight: 600;
+    padding-block-end: 8px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* TASK: Enhanced hover effect */
+#main-nav ul li a::after {
+    content: '';
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    inline-size: 0;
+    block-size: 2px;
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    transition: width 0.3s ease-in-out;
+}
+
+#main-nav ul li a:hover {
+    color: #ffffff;
+}
+
+#main-nav ul li a:hover::after {
+    inline-size: 100%;
+}
+
+
+/* --- Page Content Sections --- */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    block-size: 100vh;
+    text-align: center;
+    /* TASK: Animated Gradient Background */
+    background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+    background-size: 200% 200%;
+    animation: background-pan 15s ease infinite;
+    overflow: hidden; /* Hide elements before they animate in */
+}
+
+/* TASK: Entrance Animation for Hero Text */
+.hero-text h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem); /* Responsive font size */
+    font-weight: 700;
+    color: white;
+    margin: 0 0 10px;
+    animation: fade-in-up 0.8s ease-out 0.3s both;
+}
+
+.hero-text p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: #9ca3af;
+    animation: fade-in-up 0.8s ease-out 0.6s both;
+}
+
+.content-section {
+    padding: 100px 40px;
+    max-inline-size: 900px;
+    margin: 0 auto;
+    text-align: center;
+    /* TASK: Setup for scroll animation */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* This class is added by JS to trigger the animation */
+.content-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.content-section h2 {
+    font-size: 2.8rem;
+    margin-block-end: 20px;
+    color: white;
+}
+
+.content-section.alt {
+    background-color: #1f2937;
+}
